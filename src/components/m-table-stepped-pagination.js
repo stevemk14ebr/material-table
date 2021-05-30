@@ -2,31 +2,31 @@
 import IconButton from "@material-ui/core/IconButton";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Tooltip from "@material-ui/core/Tooltip";
-import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import PropTypes from "prop-types";
 import * as React from "react";
 /* eslint-enable no-unused-vars */
 
 class MTablePaginationInner extends React.Component {
   handleFirstPageButtonClick = (event) => {
-    this.props.onChangePage(event, 0);
+    this.props.onPageChange(event, 0);
   };
 
   handleBackButtonClick = (event) => {
-    this.props.onChangePage(event, this.props.page - 1);
+    this.props.onPageChange(event, this.props.page - 1);
   };
 
   handleNextButtonClick = (event) => {
-    this.props.onChangePage(event, this.props.page + 1);
+    this.props.onPageChange(event, this.props.page + 1);
   };
 
   handleNumberButtonClick = (number) => (event) => {
-    this.props.onChangePage(event, number);
+    this.props.onPageChange(event, number);
   };
 
   handleLastPageButtonClick = (event) => {
-    this.props.onChangePage(
+    this.props.onPageChange(
       event,
       Math.max(0, Math.ceil(this.props.count / this.props.rowsPerPage) - 1)
     );
@@ -109,9 +109,9 @@ class MTablePaginationInner extends React.Component {
             </IconButton>
           </span>
         </Tooltip>
-        <Hidden smDown={true}>
+        <Box sx={{ display: { xs: "false", sm: "false", md: "block" } }}>
           {this.renderPagesButton(pageStart, pageEnd)}
-        </Hidden>
+        </Box>
         <Tooltip title={localization.nextTooltip}>
           <span>
             <IconButton
@@ -154,7 +154,7 @@ const actionsStyles = (theme) => ({
 });
 
 MTablePaginationInner.propTypes = {
-  onChangePage: PropTypes.func,
+  onPageChange: PropTypes.func,
   page: PropTypes.number,
   count: PropTypes.number,
   rowsPerPage: PropTypes.number,
